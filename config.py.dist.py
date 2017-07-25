@@ -10,3 +10,5 @@ consumer_secret=""
 # Create an access token under the the "Your access token" section
 access_token=""
 access_token_secret=""
+
+host=""

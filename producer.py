@@ -1,12 +1,12 @@
 import threading, time
-
+from config import *
 from kafka import KafkaProducer
 
 
 class Producer(threading.Thread):
 
     def __init__(self):
-        self.producer = KafkaProducer(bootstrap_servers='192.168.26.152:9092')
+        self.producer = KafkaProducer(bootstrap_servers=host)
 
     def send_message(self, topic, message):
         self.producer.send(topic,message.encode('utf-8'))
