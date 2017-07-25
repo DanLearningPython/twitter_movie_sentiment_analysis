@@ -17,7 +17,7 @@ class StdOutListener(StreamListener):
         text = data.text
         text = TextProcessor.clean(text)
         print(text)
-        #producer.send_message('test',text)
+        producer.send_message('test',text)
         return True
 
     def on_error(self, status):
@@ -30,4 +30,4 @@ if __name__ == '__main__':
     producer = Producer()
     TextProcessor = TextProcessor()
     stream = Stream(auth, l)
-    stream.filter(track=['Dunkirk'])
+    stream.filter(track=['valerian'])
