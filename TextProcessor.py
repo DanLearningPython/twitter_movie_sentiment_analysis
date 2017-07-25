@@ -19,11 +19,16 @@ class TextProcessor:
         text = re.sub("\n", "", string)
         return text
 
+    def remove_nonascii(self, string):
+        text = re.sub(r'[^\x00-\x7f]',r'', string)
+        return text
+
     def clean(self, string):
         text = string
         text = self.remove_url(text)
         text = self.remove_rt(text)
         text = self.remove_mentions(text)
         text = self.remove_newline(text)
+        text = self.remove_nonascii(text)
 
         return text.strip()
