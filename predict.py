@@ -1,14 +1,11 @@
-import os
 import pickle
 import re
-import nltk
 
 from nltk.corpus import stopwords
-from nltk.stem.porter import PorterStemmer
-from nltk.stem import WordNetLemmatizer
 from bs4 import BeautifulSoup
 from sklearn.externals import joblib
 from sklearn.feature_extraction.text import CountVectorizer
+
 
 class Predict:
 

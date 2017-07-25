@@ -16,8 +16,9 @@ class StdOutListener(StreamListener):
     def on_status(self, data):
         text = data.text
         text = TextProcessor.clean(text)
-        print(text)
-        producer.send_message('test',text)
+        if len(text) > 0:
+            print(text)
+            #producer.send_message('test',text)
         return True
 
     def on_error(self, status):
