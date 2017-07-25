@@ -5,7 +5,7 @@ from tweepy import Stream
 from producer import Producer
 from TextProcessor import TextProcessor
 
-import config
+from config import *
 
 
 class StdOutListener(StreamListener):
