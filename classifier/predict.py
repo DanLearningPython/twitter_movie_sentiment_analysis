@@ -18,7 +18,7 @@ class Predict:
     def classify(self, vectorized_tweets):
         # returns array of classifications. 0 = negative, 1 = positive
         # convert np array into python list
-        return (self.classifier.predict(vectorized_tweets)).tolist()
+        return (self.classifier.predict_proba(vectorized_tweets)).tolist()
 
     def transform(self, clean_tweets):
         # turns tweets into vector of words
