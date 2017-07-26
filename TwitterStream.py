@@ -1,11 +1,10 @@
-from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
+from tweepy.streaming import StreamListener
 
-from producer import Producer
 from TextProcessor import TextProcessor
-
 from config import *
+from kafka.producer import Producer
 
 
 class StdOutListener(StreamListener):
