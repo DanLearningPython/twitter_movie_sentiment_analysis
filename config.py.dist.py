@@ -11,4 +11,5 @@ consumer_secret=""
 access_token=""
 access_token_secret=""
 
-host=""
+kafka_host=""
+mongo_host=""
