@@ -18,17 +18,17 @@ class StdOutListener(StreamListener):
         text = TextProcessor.clean(text)
         if len(text) > 0:
             print(text)
-            #producer.send_message('test',text)
+            producer.send_message('test',text)
         return True
 
     def on_error(self, status):
         print(status)
 
 if __name__ == '__main__':
-    l = StdOutListener()
+    listener = StdOutListener()
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     producer = Producer()
     TextProcessor = TextProcessor()
-    stream = Stream(auth, l)
+    stream = Stream(auth, listener)
     stream.filter(track=['valerian'])

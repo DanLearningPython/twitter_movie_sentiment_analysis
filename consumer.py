@@ -1,7 +1,7 @@
 from kafka import KafkaConsumer
 from predict import Predict
 from config import *
-
+import json
 
 class Consumer:
 
@@ -15,21 +15,31 @@ class Consumer:
         self.consumer.subscribe([tag])
 
         for message in self.consumer:
-            topic = message.topic
-            timestamp = message.timestamp
             value = message.value
             print(value)
             prepared_tweets = self.predict.prepare([str(value)])
             if prepared_tweets is None:
                 print("Error")
             else:
+                result = self.get_result(message)
                 sentiment = self.predict.classify(prepared_tweets)
-                #print(tweet)
-                print(sentiment)
+                result['sentiment'] = sentiment
+                print(result)
+                #self.save_result(result)
+                #print(sentiment)
 
-#tweets = list(['Congratulations to the cast and crew of @dunkirkmovie. The film has received the #criticschoice seal of distinction. #dunkirk #DunkirkMovie', 'Yes great movie here.'])
-#prepared_tweets = predict.prepare(tweets)
-#print(predict.classify(prepared_tweets))
+    def get_result(self, message):
+        results = {}
+        results['topic'] = message.topic
+        results['timestamp'] = message.timestamp
+        results['tweet'] = message.value
+
+        return results
+
+    def save_result(self, result):
+        file_name = result.topic+".txt"
+        with open(file_name, 'w') as f:
+            json.dump(result, f, ensure_ascii=True)
 
 consumer = Consumer()
 consumer.subscribe()
