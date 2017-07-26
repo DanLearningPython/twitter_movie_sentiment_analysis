@@ -1,8 +1,9 @@
-from kafka import KafkaConsumer
-from predict import Predict
-from config import *
 import json
 import pymongo
+from kafka import KafkaConsumer
+
+from classifier.predict import Predict
+from config import *
 
 
 class Consumer:
