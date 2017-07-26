@@ -4,7 +4,7 @@ from tweepy.streaming import StreamListener
 
 from TextProcessor import TextProcessor
 from config import *
-from kafka.producer import Producer
+from kafkafiles.producer import Producer
 
 
 class StdOutListener(StreamListener):
