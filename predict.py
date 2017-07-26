@@ -1,5 +1,6 @@
 import pickle
 import re
+import numpy as np
 
 from nltk.corpus import stopwords
 from bs4 import BeautifulSoup
@@ -14,11 +15,12 @@ class Predict:
         self.classifier = joblib.load('movie_reviews.pkl')
 
     def classify(self, vectorized_tweets):
-        #returns array of classifications. 0 = negative, 1 = positive
-        return self.classifier.predict(vectorized_tweets)
+        # returns array of classifications. 0 = negative, 1 = positive
+        # convert np array into python list
+        return (self.classifier.predict(vectorized_tweets)).tolist()
 
     def transform(self, clean_tweets):
-        #turns tweets into vector of words
+        # turns tweets into vector of words
         return self.vectorizer.transform(clean_tweets)
 
     def clean_tweets(self, reviews):
