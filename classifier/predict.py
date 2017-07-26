@@ -1,6 +1,6 @@
 import pickle
 import re
-import numpy as np
+import os
 
 from nltk.corpus import stopwords
 from bs4 import BeautifulSoup
@@ -11,8 +11,9 @@ from sklearn.feature_extraction.text import CountVectorizer
 class Predict:
 
     def __init__(self):
-        self.vectorizer = CountVectorizer(decode_error="replace",vocabulary=pickle.load(open("words.pkl", "rb")))
-        self.classifier = joblib.load('movie_reviews.pkl')
+        __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
+        self.vectorizer = CountVectorizer(decode_error="replace", vocabulary=pickle.load(open(__location__+"/words.pkl", "rb")))
+        self.classifier = joblib.load(__location__+'/movie_reviews.pkl')
 
     def classify(self, vectorized_tweets):
         # returns array of classifications. 0 = negative, 1 = positive
@@ -42,6 +43,8 @@ class Predict:
         return clean_review
 
     def prepare(self, raw_tweets):
+        # Takes in list of tweet strings
+
         try:
             #prepares tweet/s for classification
             cleaned_tweets = self.clean_tweets(raw_tweets)
@@ -52,10 +55,3 @@ class Predict:
             return tweet_array
         except:
             return None
-
-'''
-predict = Predict()
-tweets = list(['Congratulations to the cast and crew of @dunkirkmovie. The film has received the #criticschoice seal of distinction. #dunkirk #DunkirkMovie', 'Terrible horrible worst.'])
-prepared_tweets = predict.prepare(tweets)
-print(predict.classify(prepared_tweets))
-'''
